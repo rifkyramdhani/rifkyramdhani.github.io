@@ -47,8 +47,7 @@ export const SITE_CONTENT: SiteContent = {
     {
       company: "Insignia",
       role: "Data Engineer",
-      type: "Full-time · Hybrid",
-      location: "Jakarta, Indonesia",
+      location: "West Jakarta, Indonesia",
       startDate: "Sep 2026",
       endDate: "Present",
       current: true,
@@ -78,7 +77,6 @@ export const SITE_CONTENT: SiteContent = {
     {
       company: "Bina Nusantara IT Division",
       role: "Data Engineer",
-      type: "Full-time · On-site",
       location: "West Jakarta, Indonesia",
       startDate: "Feb 2023",
       endDate: "Jun 2026",
@@ -110,7 +108,7 @@ export const SITE_CONTENT: SiteContent = {
       degree: "Bachelor's Degree in Information Systems",
       location: "Jakarta, Indonesia",
       period: "Nov 2021 – Jul 2024",
-      detail: "GPA 3.65 / 4.00 · Cum Laude · Diploma to Bachelor's Program",
+      detail: "GPA 3.65 / 4.00 · Cum Laude",
     },
     {
       school: "State Polytechnic of Malang",
@@ -218,7 +216,7 @@ export const SITE_CONTENT: SiteContent = {
       ],
     },
     {
-      title: "Programming",
+      title: "Programming & Databases",
       items: ["Python", "SQL", "PostgreSQL", "SQL Server", "MySQL", "Oracle"],
     },
     {
@@ -247,7 +245,10 @@ export const SITE_CONTENT: SiteContent = {
         "Agile (Scrum / Waterfall)",
       ],
     },
-    { title: "Version Control", items: ["Git", "GitHub", "Docker"] },
+    {
+      title: "Version Control & Tools",
+      items: ["Git", "GitHub", "GitLab", "Docker"],
+    },
     {
       title: "BI & Visualization",
       items: ["Tableau", "Power BI", "Looker Studio"],
@@ -265,7 +266,7 @@ export const SITE_CONTENT: SiteContent = {
           href: "https://www.credly.com/badges/4896a94e-973f-4e18-918e-e33ab8ca1dc4/linked_in_profile",
         },
         {
-          name: "IBM Data Engineer",
+          name: "IBM Data Engineering",
           issuer: "Coursera",
           year: "2025",
           logo: "/IBM-logo.png",
@@ -339,7 +340,7 @@ export const SITE_CONTENT: SiteContent = {
     description: [
       "I'm a Data Engineer at Insignia with over 3 years of experience building and maintaining ETL pipelines, writing Python automation and optimizing SQL performance. I care about pipelines that run reliably without anyone watching them.",
       "Today I work across AWS, Databricks, Apache Airflow, dbt and Snowflake, from reviewing existing pipelines to building and prototyping new ones. Before that, at Bina Nusantara IT Division, I worked with Azure Data Factory, Google BigQuery, Microsoft SQL Server and PostgreSQL.",
-      "I hold an Apache Airflow certification and a Bachelor's degree in Information Systems from Bina Nusantara University (Cum Laude), and I keep learning through hands-on projects.",
+      "I hold an Apache Airflow certification and a Bachelor's degree in Information Systems from Bina Nusantara University, and I keep learning through hands-on projects.",
     ],
   },
   contact: {

@@ -13,12 +13,8 @@ const { description } = Astro.props;
   title="Reliable data, from source to dashboard."
 >
   <div class="card spot reveal p-8 md:p-12">
-    <div class="text-lg leading-relaxed text-muted md:text-xl">
-      {
-        description.map((p, i) => (
-          <p class:list={["mb-5 last:mb-0", i === 0 && "text-ink"]}>{p}</p>
-        ))
-      }
+    <div class="text-lg leading-relaxed text-ink md:text-xl">
+      {description.map((p) => <p class="mb-5 last:mb-0">{p}</p>)}
     </div>
   </div>
 </Section>

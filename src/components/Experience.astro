@@ -49,9 +49,7 @@ const { experience, education } = Astro.props;
                 {job.startDate} — {job.endDate}
               </p>
             </div>
-            <p class="mt-2 font-mono text-xs text-muted">
-              {job.type} · {job.location}
-            </p>
+            <p class="mt-2 font-mono text-xs text-muted">{job.location}</p>
             {job.summary.length > 0 && (
               <ul class="mt-6 flex flex-col gap-3">
                 {job.summary.map((item) => (
@@ -82,8 +80,9 @@ const { experience, education } = Astro.props;
           <p class="font-mono text-xs text-accent">{e.period}</p>
           <h4 class="mt-3 font-display text-xl font-bold">{e.school}</h4>
           <p class="mt-1 text-ink/90">{e.degree}</p>
-          {e.detail && <p class="mt-3 text-sm text-muted">{e.detail}</p>}
-          <p class="mt-1 font-mono text-xs text-muted">{e.location}</p>
+          <p class="mt-3 text-sm text-muted">
+            {[e.detail, e.location].filter(Boolean).join(" · ")}
+          </p>
         </div>
       ))
     }

@@ -65,7 +65,6 @@ export interface HeaderProps {
 export interface ExperienceProps {
   company: string;
   role: string;
-  type: string;
   location: string;
   startDate: string;
   endDate: string;
