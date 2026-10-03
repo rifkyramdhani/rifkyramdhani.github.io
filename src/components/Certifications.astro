@@ -1,0 +1,61 @@
+---
+import Section from "./Section.astro";
+import { Image } from "astro:assets";
+import type { CertificationGroupProps } from "@types";
+
+interface Props {
+  certifications: CertificationGroupProps[];
+}
+
+const { certifications } = Astro.props;
+---
+
+<Section id="certifications" eyebrow="learning" title="Always leveling up.">
+  <div class="grid gap-10 md:grid-cols-2">
+    {
+      certifications.map(({ title, items }, g) => (
+        <div class="reveal" style={`--d:${g * 100}ms`}>
+          <h3 class="mb-5 flex items-center gap-3 font-mono text-sm text-muted">
+            {title}
+            <span class="h-px flex-1 bg-line" />
+            <span class="text-accent">{items.length}</span>
+          </h3>
+          <ul class="flex flex-col gap-3">
+            {items.map(({ name, issuer, year, logo, href }) => (
+              <li>
+                <a
+                  href={href}
+                  target="_blank"
+                  rel="noopener"
+                  class="card spot group flex items-center gap-4 p-4 transition hover:border-accent/40"
+                >
+                  <Image
+                    class="size-12 shrink-0 rounded-xl bg-white object-contain p-1.5"
+                    src={logo}
+                    width="48"
+                    height="48"
+                    alt={`${issuer} logo`}
+                  />
+                  <div class="min-w-0 flex-1">
+                    <h4 class="font-display leading-snug font-semibold">
+                      {name}
+                    </h4>
+                    <p class="font-mono text-xs text-muted">
+                      {issuer} · {year}
+                    </p>
+                  </div>
+                  <span
+                    class="text-muted transition group-hover:translate-x-0.5 group-hover:-translate-y-0.5 group-hover:text-accent"
+                    aria-hidden="true"
+                  >
+                    ↗
+                  </span>
+                </a>
+              </li>
+            ))}
+          </ul>
+        </div>
+      ))
+    }
+  </div>
+</Section>

@@ -1,0 +1,132 @@
+---
+import type { HeaderProps } from "@types";
+
+type Props = HeaderProps;
+
+const { navLinks } = Astro.props;
+---
+
+<div
+  id="progress"
+  class="fixed top-0 left-0 z-[60] h-0.5 w-full origin-left scale-x-0 bg-gradient-to-r from-accent to-accent-2"
+>
+</div>
+
+<header class="fixed inset-x-0 top-4 z-50 flex justify-center px-4">
+  <div
+    class="relative flex w-full max-w-4xl items-center justify-between rounded-full border border-line bg-bg/70 py-2 pr-2 pl-2 shadow-2xl shadow-black/40 backdrop-blur-xl"
+  >
+    <a href="#top" aria-label="Home">
+      <img
+        src="/favicon.svg"
+        width="40"
+        height="40"
+        alt="Rifky Ramdhani"
+        class="size-10 rounded-xl ring-1 ring-line"
+      />
+    </a>
+
+    <nav id="main-menu" class="hidden md:block">
+      <ul class="flex items-center gap-1">
+        {
+          navLinks.map((link) => (
+            <li>
+              <a
+                href={link.href}
+                class="nav-item block rounded-full px-4 py-2 text-sm text-muted transition hover:text-ink"
+              >
+                {link.text}
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+    </nav>
+
+    <a href="#contact" class="btn btn-primary hidden !py-2.5 md:inline-flex">
+      Let's talk
+    </a>
+
+    <button
+      type="button"
+      id="menu-button"
+      class="mr-1 grid size-10 place-items-center rounded-full border border-line md:hidden"
+      aria-expanded="false"
+      aria-controls="mobile-menu"
+      aria-label="Toggle menu"
+    >
+      <svg
+        width="18"
+        height="18"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+        stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"></path></svg
+      >
+    </button>
+
+    <ul
+      id="mobile-menu"
+      class="absolute top-full right-0 left-0 mt-2 hidden rounded-3xl border border-line bg-bg/95 p-3 backdrop-blur-xl md:hidden"
+    >
+      {
+        navLinks.map((link) => (
+          <li>
+            <a
+              href={link.href}
+              class="nav-item block rounded-2xl px-4 py-3 text-muted hover:bg-white/5 hover:text-ink"
+            >
+              {link.text}
+            </a>
+          </li>
+        ))
+      }
+    </ul>
+  </div>
+</header>
+
+<script>
+  const button = document.querySelector("#menu-button");
+  const mobile = document.querySelector("#mobile-menu");
+  const items = document.querySelectorAll<HTMLAnchorElement>(".nav-item");
+
+  const setOpen = (open: boolean) => {
+    mobile?.classList.toggle("hidden", !open);
+    button?.setAttribute("aria-expanded", `${open}`);
+  };
+  button?.addEventListener("click", () =>
+    setOpen(mobile?.classList.contains("hidden") ?? false),
+  );
+  mobile
+    ?.querySelectorAll("a")
+    .forEach((a) => a.addEventListener("click", () => setOpen(false)));
+
+  // scroll progress bar
+  const bar = document.querySelector<HTMLElement>("#progress");
+  const onScroll = () => {
+    const max = document.documentElement.scrollHeight - innerHeight;
+    bar?.style.setProperty(
+      "transform",
+      `scaleX(${max > 0 ? scrollY / max : 0})`,
+    );
+  };
+  addEventListener("scroll", onScroll, { passive: true });
+  onScroll();
+
+  // highlight the section in view
+  const io = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((e) => {
+        if (!e.isIntersecting) return;
+        items.forEach((a) => {
+          const on = a.getAttribute("href") === `#${e.target.id}`;
+          a.classList.toggle("!text-ink", on);
+          a.classList.toggle("bg-white/10", on && !a.closest("#mobile-menu"));
+        });
+      });
+    },
+    { rootMargin: "-45% 0px -50% 0px" },
+  );
+  document.querySelectorAll("main section[id]").forEach((s) => io.observe(s));
+</script>

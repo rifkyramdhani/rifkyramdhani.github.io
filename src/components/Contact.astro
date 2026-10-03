@@ -1,0 +1,100 @@
+---
+import Section from "./Section.astro";
+import type { ContactProps, SiteConfig } from "@types";
+
+type Props = ContactProps & Pick<SiteConfig, "socialLinks">;
+
+const { email, formAction, socialLinks } = Astro.props;
+
+const field =
+  "mt-2 w-full rounded-2xl border border-line bg-white/[0.03] px-4 py-3 text-base text-ink transition placeholder:text-muted/50 focus:border-accent/60 focus:bg-white/[0.05] focus:outline-none";
+---
+
+<Section id="contact" eyebrow="contact" title="Let's build something reliable.">
+  <div class="card reveal relative p-8 md:p-12">
+    <div
+      class="pointer-events-none absolute -top-24 -right-24 size-80 animate-float rounded-full bg-accent/20 blur-3xl"
+    >
+    </div>
+    <div
+      class="pointer-events-none absolute -bottom-24 -left-24 size-80 animate-float rounded-full bg-accent-2/20 blur-3xl [animation-delay:-3s]"
+    >
+    </div>
+
+    <div class="relative grid gap-12 md:grid-cols-2">
+      <div>
+        <p class="text-lg leading-relaxed text-muted">
+          Interested in collaborating or have questions about my work? Send a
+          message and I'll get back to you.
+        </p>
+        <a
+          href={`mailto:${email}`}
+          class="mt-6 inline-block font-display text-xl font-semibold break-all hover:text-accent md:text-2xl"
+        >
+          {email}
+        </a>
+        <ul class="mt-8 flex flex-wrap gap-2">
+          {
+            socialLinks.map(({ text, href }) => (
+              <li>
+                <a
+                  href={href}
+                  target="_blank"
+                  rel="noopener"
+                  class="chip transition hover:border-accent/50 hover:text-accent"
+                >
+                  {text} ↗
+                </a>
+              </li>
+            ))
+          }
+        </ul>
+      </div>
+
+      <form action={formAction} method="POST" class="flex flex-col gap-4">
+        <label class="text-sm text-muted"
+          >Name
+          <input
+            class={field}
+            type="text"
+            name="name"
+            placeholder="Your name"
+            required
+          />
+        </label>
+        <label class="text-sm text-muted"
+          >Email
+          <input
+            class={field}
+            type="email"
+            name="email"
+            placeholder="you@example.com"
+            required
+          />
+        </label>
+        <label class="text-sm text-muted"
+          >Subject
+          <input
+            class={field}
+            type="text"
+            name="subject"
+            placeholder="What's it about?"
+            required
+          />
+        </label>
+        <label class="text-sm text-muted"
+          >Message
+          <textarea
+            class={field}
+            name="message"
+            rows="5"
+            placeholder="Your message"
+            required></textarea>
+        </label>
+        <button type="submit" class="btn btn-primary mt-2 self-start"
+          >Send message →</button
+        >
+      </form>
+    </div>
+  </div>
+</Section>

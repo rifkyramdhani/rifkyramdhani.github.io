@@ -1,14 +1,26 @@
-# Rifky Ramdhani - Data Engineer Portfolio
+# Rifky Ramdhani — Portfolio
 
-A professional portfolio website showcasing modern data engineering pipelines, data warehousing, and analytics solutions. 
+Personal portfolio of a Data Engineer, built with [Astro](https://astro.build) and Tailwind CSS v4.
+Live at [rifkyramdhani.github.io](https://rifkyramdhani.github.io).
 
-## 🛠️ Data Engineering Tech Stack
+## Develop
 
-* **Orchestration:** Apache Airflow / Astro (Managing automated DAGs and pipeline workflows)
-* **Transformation:** dbt (Data Build Tool) for modular SQL-based data transformations
-* **Data Warehouse:** Snowflake for scalable cloud storage and analytics
-* **Source Systems:** MySQL (OLTP databases and operational data)
-* **Analytics & BI:** Tableau & Microsoft Fabric for interactive dashboards and reporting
+```bash
+npm install
+npm run dev      # http://localhost:4321
+npm run build    # type-check + production build into dist/
+npm run preview  # serve the production build
+```
 
-## 🌐 Live Website
-Check out the live portfolio at: [rifkyramdhani.github.io](https://rifkyramdhani.github.io)
+Requires Node 22.12 or newer.
+
+## Edit content
+
+All text, links, projects, skills and certifications live in [`src/config/index.ts`](src/config/index.ts).
+Images and project covers are in [`public/`](public).
+
+## Deploy
+
+Pushing to `main` builds the site and publishes it through GitHub Actions
+(`.github/workflows/deploy.yml`). In the repository settings, **Pages → Build and deployment → Source**
+must be set to **GitHub Actions**.

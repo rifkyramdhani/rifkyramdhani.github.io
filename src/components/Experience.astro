@@ -1,0 +1,91 @@
+---
+import Section from "./Section.astro";
+import type { EducationProps, ExperienceProps } from "@types";
+
+interface Props {
+  experience: ExperienceProps[];
+  education: EducationProps[];
+}
+
+const { experience, education } = Astro.props;
+---
+
+<Section id="experience" eyebrow="experience" title="Where I've worked.">
+  <ol class="relative ml-3 border-l border-line">
+    {
+      experience.map((job, i) => (
+        <li
+          class="reveal relative pb-12 pl-8 last:pb-0 md:pl-12"
+          style={`--d:${i * 100}ms`}
+        >
+          <span
+            class:list={[
+              "absolute top-2 -left-[7px] size-3.5 rounded-full border-2 border-bg",
+              job.current
+                ? "bg-accent shadow-[0_0_0_4px_rgb(45_212_191/0.2)]"
+                : "bg-muted",
+            ]}
+          />
+          <div class="card spot p-7 md:p-9">
+            <div class="flex flex-wrap items-start justify-between gap-3">
+              <div>
+                <h3 class="font-display text-2xl font-bold md:text-3xl">
+                  {job.role}
+                </h3>
+                <p class="mt-1 text-lg text-accent">{job.company}</p>
+              </div>
+              <p
+                class:list={[
+                  "flex items-center gap-2 font-mono text-sm md:justify-end",
+                  job.current ? "text-accent" : "text-muted",
+                ]}
+              >
+                {job.current && (
+                  <span class="relative flex size-2">
+                    <span class="absolute inline-flex size-full animate-ping rounded-full bg-accent opacity-70" />
+                    <span class="relative inline-flex size-2 rounded-full bg-accent" />
+                  </span>
+                )}
+                {job.startDate} — {job.endDate}
+              </p>
+            </div>
+            <p class="mt-2 font-mono text-xs text-muted">
+              {job.type} · {job.location}
+            </p>
+            {job.summary.length > 0 && (
+              <ul class="mt-6 flex flex-col gap-3">
+                {job.summary.map((item) => (
+                  <li class="relative pl-6 leading-relaxed text-muted before:absolute before:top-[0.7em] before:left-0 before:h-px before:w-3 before:bg-accent">
+                    {item}
+                  </li>
+                ))}
+              </ul>
+            )}
+            {job.tech && (
+              <ul class="mt-6 flex flex-wrap gap-2">
+                {job.tech.map((t) => (
+                  <li class="chip">{t}</li>
+                ))}
+              </ul>
+            )}
+          </div>
+        </li>
+      ))
+    }
+  </ol>
+
+  <h3 class="eyebrow reveal mt-20 mb-6">// education</h3>
+  <div class="grid gap-5 md:grid-cols-2">
+    {
+      education.map((e, i) => (
+        <div class="card spot reveal p-7" style={`--d:${i * 100}ms`}>
+          <p class="font-mono text-xs text-accent">{e.period}</p>
+          <h4 class="mt-3 font-display text-xl font-bold">{e.school}</h4>
+          <p class="mt-1 text-ink/90">{e.degree}</p>
+          {e.detail && <p class="mt-3 text-sm text-muted">{e.detail}</p>}
+          <p class="mt-1 font-mono text-xs text-muted">{e.location}</p>
+        </div>
+      ))
+    }
+  </div>
+</Section>

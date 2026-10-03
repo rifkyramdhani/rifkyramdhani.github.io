@@ -1,0 +1,82 @@
+---
+import Section from "./Section.astro";
+import { Image } from "astro:assets";
+import type { ProjectProps } from "@types";
+
+interface Props {
+  projects: ProjectProps[];
+}
+
+const { projects } = Astro.props;
+---
+
+<Section id="projects" eyebrow="projects" title="Things I've built.">
+  <div class="grid gap-5 md:grid-cols-2">
+    {
+      projects.map(({ name, summary, image, status, tags, links }, i) => (
+        <article
+          class:list={["card spot reveal group flex flex-col"]}
+          style={`--d:${(i % 2) * 100}ms`}
+        >
+          <div
+            class:list={[
+              "relative overflow-hidden border-b border-line bg-[#0b1117]",
+              "aspect-[16/10]",
+            ]}
+          >
+            {image ? (
+              <Image
+                class="size-full object-contain transition duration-700 group-hover:scale-105"
+                src={image}
+                width="900"
+                height="560"
+                alt={name}
+              />
+            ) : (
+              <div class="grid size-full place-items-center bg-gradient-to-br from-accent/15 to-accent-2/15 p-6">
+                <p class="text-center font-mono text-sm leading-8 text-accent">
+                  {tags.slice(2).join("  →  ")}
+                </p>
+              </div>
+            )}
+            <div class="absolute inset-0 bg-gradient-to-t from-surface/60 to-transparent" />
+          </div>
+          <div class="flex flex-1 flex-col p-7 md:p-9">
+            <p class="mb-3 flex items-center gap-3 font-mono text-xs text-accent">
+              <span>
+                {String(i + 1).padStart(2, "0")} /{" "}
+                {String(projects.length).padStart(2, "0")}
+              </span>
+              {status && (
+                <span class="chip !border-accent/40 !text-accent">
+                  {status}
+                </span>
+              )}
+            </p>
+            <h3 class="font-display text-2xl leading-tight font-bold md:text-3xl">
+              {name}
+            </h3>
+            <p class="mt-4 leading-relaxed text-muted">{summary}</p>
+            <ul class="mt-5 flex flex-wrap gap-2">
+              {tags.map((t) => (
+                <li class="chip">{t}</li>
+              ))}
+            </ul>
+            <div class="mt-auto flex flex-wrap gap-3 pt-8 empty:hidden">
+              {links.map(({ text, href }) => (
+                <a
+                  href={href}
+                  target="_blank"
+                  rel="noopener"
+                  class="btn btn-ghost !py-2.5"
+                >
+                  {text} <span aria-hidden="true">↗</span>
+                </a>
+              ))}
+            </div>
+          </div>
+        </article>
+      ))
+    }
+  </div>
+</Section>

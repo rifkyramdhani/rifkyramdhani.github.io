@@ -1,0 +1,44 @@
+---
+import Section from "./Section.astro";
+import type { SkillGroupProps } from "@types";
+
+interface Props {
+  skills: SkillGroupProps[];
+}
+
+const { skills } = Astro.props;
+// bento layout: wide / narrow / narrow / wide
+const spans = [
+  "md:col-span-4",
+  "md:col-span-2",
+  "md:col-span-3",
+  "md:col-span-3",
+  "md:col-span-2",
+  "md:col-span-4",
+];
+---
+
+<Section id="skills" eyebrow="skills" title="The stack I work with.">
+  <div class="grid gap-5 md:grid-cols-6">
+    {
+      skills.map(({ title, items }, i) => (
+        <div
+          class:list={["card spot reveal p-8", spans[i % spans.length]]}
+          style={`--d:${(i % 2) * 100}ms`}
+        >
+          <p class="mb-6 flex items-center justify-between">
+            <span class="font-display text-2xl font-bold">{title}</span>
+            <span class="font-mono text-xs text-accent">
+              {String(i + 1).padStart(2, "0")}
+            </span>
+          </p>
+          <ul class="flex flex-wrap gap-2">
+            {items.map((item) => (
+              <li class="chip !py-1.5 !text-sm">{item}</li>
+            ))}
+          </ul>
+        </div>
+      ))
+    }
+  </div>
+</Section>

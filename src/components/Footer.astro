@@ -1,0 +1,16 @@
+---
+import type { SiteConfig } from "@types";
+
+type Props = Pick<SiteConfig, "author">;
+
+const { author } = Astro.props;
+---
+
+<footer class="border-t border-line px-5 py-8">
+  <div
+    class="mx-auto flex max-w-5xl flex-col items-center justify-between gap-3 font-mono text-xs text-muted sm:flex-row"
+  >
+    <p>© {new Date().getFullYear()} {author}</p>
+    <a href="#top" class="transition hover:text-accent">Back to top ↑</a>
+  </div>
+</footer>
